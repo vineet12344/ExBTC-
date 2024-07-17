@@ -1,7 +1,10 @@
 'use client'
 
+import Ripples from 'react-ripples'
+
 import {
   Box,
+  Image,
   Flex,
   Text,
   IconButton,
@@ -17,6 +20,7 @@ import {
   useDisclosure,
 } from '@chakra-ui/react'
 import { ChevronDownIcon, ChevronRightIcon, CloseIcon, HamburgerIcon } from '@chakra-ui/icons';
+import walletconnect from './walletconnect';
 
 export default function NavBar() {
   const { isOpen, onToggle } = useDisclosure()
@@ -24,62 +28,71 @@ export default function NavBar() {
   return (
     <Box>
       <Flex
-        bg={useColorModeValue('black', 'gray.800')}
-        color={useColorModeValue('gray.600', 'white')}
-        minH={'60px'}
+        // position={"sticky"}
+        bg={useColorModeValue("black", "gray.800")}
+        color={useColorModeValue("gray.600", "white")}
+        minH={"60px"}
         py={{ base: 2 }}
         px={{ base: 4 }}
         borderBottom={1}
-        borderStyle={'solid'}
-        borderColor={useColorModeValue('gray.200', 'gray.900')}
-        align={'center'}
-        maxWidth={'100%'}>
+        borderStyle={"solid"}
+        borderColor={useColorModeValue("blue.200", "blue.900")}
+        align={"center"}
+        maxWidth={"100%"}
+        transition={"all ease 0.3s"}
+      >
         <Flex
-          flex={{ base: 1, md: 'auto' }}
+          flex={{ base: 1, md: "auto" }}
           ml={{ base: -2 }}
-          display={{ base: 'flex', md: 'none' }}>
+          display={{ base: "flex", md: "none" }}
+        >
           <IconButton
+            border={"1px solid"}
+            borderColor={"blue.600"}
             onClick={onToggle}
-            icon={isOpen ? <CloseIcon w={3} h={3} /> : <HamburgerIcon w={5} h={5} />}
-            variant={'ghost'}
-            aria-label={'Toggle Navigation'}
+            icon={
+              isOpen ? (
+                <CloseIcon w={3} h={3} />
+              ) : (
+                <HamburgerIcon color={"blue.600"} w={5} h={5} />
+              )
+            }
+            variant={"ghost"}
+            aria-label={"Toggle Navigation"}
           />
         </Flex>
-        <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
-          <Text
-            textAlign={useBreakpointValue({ base: 'center', md: 'left' })}
-            fontFamily={'heading'}
-            color={useColorModeValue( 'white')}
-            fontSize={'x-large'}>
-            Logo
-          </Text>
-
-          <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
+        <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+          <Image src="../public/assets/Logo3.png" width={"50px"} ml={"15px"} />
+          <Flex display={{ base: "none", md: "flex" }} ml={10}>
             <DesktopNav />
           </Flex>
         </Flex>
 
         <Stack
           flex={{ base: 1, md: 0 }}
-          justify={'flex-end'}
-          direction={'row'}
-          spacing={6}>
-          <Button as={'a'} fontSize={'sm'} fontWeight={400} variant={'link'} href={'#'}>
-            Sign In
-          </Button>
-          <Button
-            as={'a'}
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            href={'#'}
-            _hover={{
-              bg: 'pink.300',
-            }}>
-            Sign Up
-          </Button>
+          justify={"flex-end"}
+          direction={"row"}
+          spacing={6}
+        >
+          <Ripples>
+            <Button
+              as={"a"}
+              display={{ base: "none", md: "inline-flex" }}
+              fontSize={"sm"}
+              fontWeight={600}
+              color={"white"}
+              bg={"blue.900"}
+              transition={"all ease 0.3s"}
+              href={"#"}
+              _hover={{
+                bg: "blue.600",
+                border: " 1px solid aqua",
+              }}
+              onClick={walletconnect}
+            >
+              Connect Wallet
+            </Button>
+          </Ripples>
         </Stack>
       </Flex>
 
@@ -87,7 +100,7 @@ export default function NavBar() {
         <MobileNav />
       </Collapse>
     </Box>
-  )
+  );
 }
 
 const DesktopNav = () => {
@@ -102,6 +115,8 @@ const DesktopNav = () => {
           <Popover trigger={'hover'} placement={'bottom-start'}>
             <PopoverTrigger>
               <Box
+                display={'flex'}
+                alignItems={'center'}
                 as="a"
                 p={2}
                 href={navItem.href ?? '#'}
@@ -110,7 +125,7 @@ const DesktopNav = () => {
                 color={linkColor}
                 textColor={'white'}
                 _hover={{
-                  textDecoration: 'underline',
+                  textDecoration: 'none',
                   color: linkHoverColor,
                 }}>
                 {navItem.label}
@@ -148,12 +163,12 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
       display={'block'}
       p={2}
       rounded={'md'}
-      _hover={{ bg: useColorModeValue('pink.50', 'gray.900') }}>
+      _hover={{ bg: useColorModeValue('blue.50', 'gray.900') }}>
       <Stack direction={'row'} align={'center'}>
         <Box>
           <Text
             transition={'all .3s ease'}
-            _groupHover={{ color: 'pink.400' }}
+            _groupHover={{ color: 'blue.400' }}
             fontWeight={500}>
             {label}
           </Text>
@@ -167,7 +182,7 @@ const DesktopSubNav = ({ label, href, subLabel }) => {
           justify={'flex-end'}
           align={'center'}
           flex={1}>
-          <Icon color={'pink.400'} w={5} h={5} as={ChevronRightIcon} />
+          <Icon color={'blue.400'} w={5} h={5} as={ChevronRightIcon} />
         </Flex>
       </Stack>
     </Box>
@@ -234,41 +249,22 @@ const MobileNavItem = ({ label, children, href }) => {
 
 const NAV_ITEMS = [
   {
-    label: 'Inspiration',
+    label: 'Developers',
     children: [
       {
-        label: 'Explore Design Work',
-        subLabel: 'Trending Design to inspire you',
+        label: 'Explore Github Profiles',
+        subLabel: 'Our Github Profiles',
         href: '#',
       },
       {
-        label: 'New & Noteworthy',
-        subLabel: 'Up-and-coming Designers',
+        label: 'Explore LinkedIn Profiles',
+        subLabel: 'Our LinkedIn Profiles',
         href: '#',
       },
     ],
   },
   {
-    label: 'Find Work',
-    children: [
-      {
-        label: 'Job Board',
-        subLabel: 'Find your dream design job',
-        href: '#',
-      },
-      {
-        label: 'Freelance Projects',
-        subLabel: 'An exclusive list for contract work',
-        href: '#',
-      },
-    ],
-  },
-  {
-    label: 'Learn Design',
-    href: '#',
-  },
-  {
-    label: 'Hire Designers',
+    label: 'Hire Us',
     href: '#',
   },
 ]
