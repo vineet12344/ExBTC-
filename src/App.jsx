@@ -8,13 +8,14 @@ import TransactionPage from "./components/TransactionPage";
 function App() {
   return (
     <>
+      
+      <Router>
       <Starfield
         speedFactor={0.02}
         starCount={5500}
         backgroundColor="black"
         starColor={[255, 255, 255, 255]}
       />
-      <Router>
         <NavBar />
         <Routes>
           <Route path="/" element={<HomePage />} />

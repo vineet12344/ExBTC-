@@ -74,25 +74,7 @@ export default function NavBar() {
           direction={"row"}
           spacing={6}
         >
-          <Ripples>
-            <Button
-              as={"a"}
-              display={{ base: "none", md: "inline-flex" }}
-              fontSize={"sm"}
-              fontWeight={600}
-              color={"white"}
-              bg={"blue.900"}
-              transition={"all ease 0.3s"}
-              href={"#"}
-              _hover={{
-                bg: "blue.600",
-                border: " 1px solid aqua",
-              }}
-              onClick={walletconnect}
-            >
-              Connect Wallet
-            </Button>
-          </Ripples>
+          
         </Stack>
       </Flex>
 

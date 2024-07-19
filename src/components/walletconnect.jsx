@@ -19,6 +19,12 @@ const walletconnect = async () => {
     
   }
 
+  const accounts = await ethereum.request({ method: 'eth_requestAccounts' });
+
+  if (accounts.length > 0) {
+    window.location.href = '/TransactionPage'; 
+}
+
 //   redirectPage();
 };
 

@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Global } from "@emotion/react";
+import Starfield from "react-starfield";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
@@ -48,6 +49,14 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           animation: scrollThumb 1.5s infinite;
         }
         `}
+      />
+
+
+      <Starfield
+        speedFactor={0.02}
+        starCount={5500}
+        backgroundColor="black"
+        starColor={[255, 255, 255, 255]}
       />
       <App />
     </ChakraProvider>
